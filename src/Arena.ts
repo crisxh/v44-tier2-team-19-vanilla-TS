@@ -1,12 +1,12 @@
 
 
-class GridSquare{
+export class GridSquare{
 posX:number
 posY:number
 
-    constructor(posX:number,posY:number){
-        this.posX=posX
-        this.posY=posY
+    constructor(posx:number,posy:number){
+        this.posX=posx
+        this.posY=posy
     }
     draw(){
         ctx.fillStyle = 'green';
@@ -14,6 +14,7 @@ posY:number
     }
 }
 
-const square=new GridSquare(10,10)
 
-square.draw()
+
+
+
