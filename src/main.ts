@@ -1,4 +1,5 @@
 import { canvas as c, canvasContext as ctx } from './browser/browserElements'
+import {button as button} from './browser/browserElements'
 // import { GridSquare } from './Arena'
 
 c.height = innerHeight
@@ -97,39 +98,44 @@ grid.forEach((row, i) => {
   })
 })
 
-gridSquares.forEach((square) => {
-  square.draw()
- // square.drawID()
-})
 
-boundaries.forEach((boundary) => {
-  boundary.draw()
-  
-}
 
-)
-let scene= document.getElementById('scene');
 
 
 function drawRandomSquare(){
  let index=Math.floor(Math.random()*gridSquares.length)
  let square=gridSquares[index]
  console.log('square: ',square)
-
-          ctx.fillStyle = 'red';
-          ctx.fillRect(square.posX, square.posY, 20, 20);
+ ctx.fillStyle = 'red';
+  ctx.fillRect(square.posX, square.posY, 20, 20);
          
   }
   drawRandomSquare();
 
-if(scene){ 
-  scene.addEventListener('onClick',(e)=>{
-    console.log(e);
-    console.log('randomSquare!')
-    drawRandomSquare();
-  })
 
-}
+
 
 console.log(gridSquares)
 console.log(boundaries)
+
+function animate(){
+  requestAnimationFrame(animate)
+  console.log('animating...')
+    //ctx.clearRect(0,0,c.width,c.height)
+    gridSquares.forEach((square) => {
+      square.draw()
+     // square.drawID()
+    })
+    
+    boundaries.forEach((boundary) => {
+      boundary.draw()
+      
+    })
+
+    
+}
+
+button.addEventListener('onclick',()=>{
+  console.log('button test')
+});
+animate()
