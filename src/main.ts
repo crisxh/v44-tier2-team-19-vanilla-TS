@@ -1,6 +1,6 @@
-import {Animate} from './Arena/Arena';
+import {Arena} from './Arena/Arena';
 
-Animate();
+Arena();
 
 
 
