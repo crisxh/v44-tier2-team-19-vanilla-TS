@@ -1,4 +1,5 @@
 import { canvasContext as ctx } from '../browser/browserElements'
+import { drawRandomSquare } from './Functions'
 
 class Boundary{
   posY:number
@@ -60,6 +61,10 @@ ctx.fillText(this.squareName, this.posX+this.width/2, this.posY+this.height/2);
     draw(){
         ctx.fillStyle = 'red';
           ctx.fillRect(this.posX, this.posY, this.height, this.width);
+
+    }
+    update(){
+        
 
     }
   }

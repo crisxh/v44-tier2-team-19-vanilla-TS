@@ -1,5 +1,7 @@
-import { gridSquares,boundaries} from './Grid'
-import { canvas as c, canvasContext as ctx } from '../browser/browserElements'
+import { gridSquares,boundaries} from './Grid';
+import { canvas as c, canvasContext as ctx } from '../browser/browserElements';
+import { TestPlayer } from './Classes'
+
 
 function drawRandomSquare(){
     let index=Math.floor(Math.random()*gridSquares.length)
@@ -25,7 +27,7 @@ function drawRandomSquare(){
          boundary.draw()
          
        })
-   
+   TestPlayer.update()
        
    }
    
