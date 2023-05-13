@@ -15,4 +15,4 @@ class GridSquare {
   }
 }
 
-export { GridSquare }
+// export { GridSquare }
