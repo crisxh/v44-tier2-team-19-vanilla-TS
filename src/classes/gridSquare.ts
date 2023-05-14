@@ -1,31 +1,27 @@
 import { canvasContext as ctx } from '../browser/browserElements'
-import { type IntGridSquare } from '../utils/interfaces'
+import { type IntCoordinatesXY, type IntGridSquare } from '../utils/interfaces'
 
 class GridSquare {
-  posX: number
-  posY: number
-  squareID: number
-  squareName: string
-  height: number
-  width: number
-  constructor ({ posX, posY, squareName, squareID }: IntGridSquare) {
-    this.posX = posX
-    this.posY = posY
+  public position: IntCoordinatesXY
+  public squareName: string
+  public height: number
+  public width: number
+
+  constructor ({ position, squareName }: IntGridSquare) {
+    this.position = position
     this.height = 50
     this.width = 50
     this.squareName = squareName
-    this.squareID = squareID
   }
 
   draw (): void {
     ctx.fillStyle = 'green'
-    ctx.fillRect(this.posX, this.posY, this.height, this.width)
+    ctx.fillRect(this.position.x, this.position.y, this.height, this.width)
   }
 
   drawID (): void {
     ctx.fillStyle = 'black'
     ctx.font = '30px Arial'
-    ctx.fillText(this.squareName, this.posX + this.width / 2, this.posY + this.height / 2)
   }
 }
 
