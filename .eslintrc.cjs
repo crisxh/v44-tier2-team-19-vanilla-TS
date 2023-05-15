@@ -12,5 +12,7 @@ module.exports = {
     project: './tsconfig.json'
   },
   rules: {
+    'key-spacing': 'off',
+    '@typescript-eslint/key-spacing': 'off'
   }
 }

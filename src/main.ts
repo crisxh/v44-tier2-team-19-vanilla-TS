@@ -4,7 +4,6 @@ import { Boundary } from './classes/boundary'
 import { GridSquare } from './classes/gridSquare'
 import { type IntCollitionCircleAndRectangle } from './utils/interfaces'
 
-
 c.width = window.innerWidth
 c.height = window.innerHeight
 
@@ -13,6 +12,8 @@ c.height = window.innerHeight
 const gridSquares: GridSquare[] = []
 const boundaries: Boundary[] = []
 const bots: Player[] = []
+
+let animationID = 0
 
 const grid = [
   ['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+'],
@@ -25,7 +26,6 @@ const grid = [
   ['+', '-', '-', '-', '-', '-', '-', '-', '-', '-', '+'],
   ['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+']
 ]
-
 
 /* ============== Draw Map ============== */
 
@@ -59,35 +59,27 @@ grid.forEach((row, rowIndex) => {
 
 /* ================== functions =================== */
 
-let animationID = 0
-
 function animate (): void {
   animationID = requestAnimationFrame(animate)
   ctx.clearRect(0, 0, c.width, c.height)
 
   gridSquares.forEach((square) => { square.draw() })
 
-  boundaries.forEach((boundary) => { 
-    bots.forEach((bot) => { 
+  boundaries.forEach((boundary) => {
+    bots.forEach((bot) => {
       bot.draw()
-      
-      
-        })
-    
-    boundary.draw() })
+    })
 
+    boundary.draw()
+  })
 
-
-  // change this 
+  // change this
   // if (pellets.length === 0) {
-    // cancelAnimationFrame(animationID)
+  // cancelAnimationFrame(animationID)
   // }
-  
 }
 
 animate()
-
-
 
 function circleCollideWithReactangle ({
   circle,
@@ -114,8 +106,6 @@ function circleCollideWithReactangle ({
   circleBorders.bottom >= boundaryBorders.top &&
   circleBorders.left <= boundaryBorders.right
 }
-
-
 
 /* classes */
 
@@ -145,7 +135,6 @@ class Player {
   }
 }
 
-
 /* ================== Create Player (future bot) ================== */
 
 const player = new Player({
@@ -160,4 +149,3 @@ const player = new Player({
 })
 
 bots.push(player)
-
