@@ -6,6 +6,7 @@ class Boundary {
   public height: number
   public width: number
   static width = 50
+  static height = 50
 
   constructor ({ position, width = 50, height = 50 }: IntBoundary) {
     this.position = position
