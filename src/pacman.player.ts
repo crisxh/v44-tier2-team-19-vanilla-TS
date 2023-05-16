@@ -70,6 +70,7 @@
   ]
 
   const boundaries: Boundary[] = []
+  const players: Player[] = []
 
   let lastKey = ''
   // let animationID: number
@@ -123,10 +124,12 @@
     public velocity: InterfacePositionsXY
     public prevCollision: string[]
     public radius: number
+    public color: string
 
-    constructor ({ position, velocity, radius = 15 }: InterfacePlayer) {
+    constructor ({ position, velocity, color = 'yellow', radius = 15 }: InterfacePlayer) {
       this.position = position
       this.velocity = velocity
+      this.color = color
       this.radius = radius
       this.prevCollision = []
     }
@@ -136,7 +139,7 @@
       c.translate(-this.position.x, -this.position.y)
       c.beginPath()
       c.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2)
-      c.fillStyle = 'yellow'
+      c.fillStyle = this.color
       c.fill()
       c.closePath()
     }
@@ -156,10 +159,51 @@
       y: Boundary.height + (Boundary.height / 2)
     },
     velocity: {
-      x: 0,
-      y: 0
+      x: getRandomSpeed().x,
+      y: getRandomSpeed().y
     }
   })
+
+  const player2 = new Player({
+    position: {
+      x: Boundary.width * 5 + (Boundary.width / 2),
+      y: Boundary.height * 5 + (Boundary.height / 2)
+    },
+    velocity: {
+      x: getRandomSpeed().x,
+      y: getRandomSpeed().y
+    },
+    color: 'red'
+  })
+
+  const player3 = new Player({
+    position: {
+      x: Boundary.width * 6 + (Boundary.width / 2),
+      y: Boundary.height * 10 + (Boundary.height / 2)
+    },
+    velocity: {
+      x: getRandomSpeed().x,
+      y: getRandomSpeed().y
+    },
+    color: 'blue'
+  })
+
+  const player4 = new Player({
+    position: {
+      x: Boundary.width * 3 + (Boundary.width / 2),
+      y: Boundary.height * 6 + (Boundary.height / 2)
+    },
+    velocity: {
+      x: getRandomSpeed().x,
+      y: getRandomSpeed().y
+    },
+    color: 'violet'
+  })
+
+  players.push(player)
+  players.push(player2)
+  players.push(player3)
+  players.push(player4)
 
   map.forEach((row, rowIndex) => {
     row.forEach((symbol, columnIndex) => {
@@ -211,30 +255,32 @@
 
     // place here the function to detect collision beteween ghost and player
 
-    // player bounces off the boundaries
-    playerMoveByIA()
+    players.forEach((player) => {
+      // player bounces off the boundaries
+      playerMoveByIA(player)
 
-    // if player collide with boundary, player stop
-    boundaries.forEach((boundary) => {
-      boundary.draw()
+      // if player collide with boundary, player stop
+      boundaries.forEach((boundary) => {
+        boundary.draw()
 
-      if (
-        circleCollideWithReactangle({
-          circle: player,
-          rectangle: boundary
-        })) {
-        player.velocity.y = 0
-        player.velocity.x = 0
-      }
+        if (
+          circleCollideWithReactangle({
+            circle: player,
+            rectangle: boundary
+          })) {
+          player.velocity.y = 0
+          player.velocity.x = 0
+        }
+      })
+      player.update()
     })
-    player.update()
   }
 
   animate()
 
   /* ============= player movement ============= */
 
-  function getRandomSpeed (collitionWall: string): InterfacePositionsXY {
+  function getRandomSpeed (collitionWall = ''): InterfacePositionsXY {
     const speedX = Math.round(Math.random() * 5)
     const speedY = Math.round(Math.random() * 5)
     let x: number = 0
@@ -245,7 +291,7 @@
       if (randomNum === 1) {
         return num * 1
       } else {
-        return num * 0
+        return num * -1
       }
     }
 
@@ -280,12 +326,15 @@
     } else if (collitionWall === 'left') {
       x = speedX
       y = randomMultiply(speedY)
+    } else {
+      x = randomMultiply(speedX)
+      y = randomMultiply(speedY)
     }
 
     return { x, y }
   }
 
-  function playerMoveByIA (): void {
+  function playerMoveByIA (player: Player): void {
     // player touch boundary
     const collisions: string[] = []
 
