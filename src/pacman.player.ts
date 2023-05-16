@@ -164,46 +164,21 @@
     }
   })
 
-  const player2 = new Player({
-    position: {
-      x: Boundary.width * 5 + (Boundary.width / 2),
-      y: Boundary.height * 5 + (Boundary.height / 2)
-    },
-    velocity: {
-      x: getRandomSpeed().x,
-      y: getRandomSpeed().y
-    },
-    color: 'red'
-  })
-
-  const player3 = new Player({
-    position: {
-      x: Boundary.width * 6 + (Boundary.width / 2),
-      y: Boundary.height * 10 + (Boundary.height / 2)
-    },
-    velocity: {
-      x: getRandomSpeed().x,
-      y: getRandomSpeed().y
-    },
-    color: 'blue'
-  })
-
-  const player4 = new Player({
-    position: {
-      x: Boundary.width * 3 + (Boundary.width / 2),
-      y: Boundary.height * 6 + (Boundary.height / 2)
-    },
-    velocity: {
-      x: getRandomSpeed().x,
-      y: getRandomSpeed().y
-    },
-    color: 'violet'
-  })
-
-  players.push(player)
-  players.push(player2)
-  players.push(player3)
-  players.push(player4)
+  for (let i = 0; i < 8; i++) {
+    const colors = ['blue', 'yellow', 'red', 'white', 'violet', 'green', 'lightBlue', 'gray']
+    const player = new Player({
+      position: {
+        x: Boundary.width * 3 + (Boundary.width / 2),
+        y: Boundary.height * 6 + (Boundary.height / 2)
+      },
+      velocity: {
+        x: getRandomSpeed().x,
+        y: getRandomSpeed().y
+      },
+      color: colors[i]
+    })
+    players.push(player)
+  }
 
   map.forEach((row, rowIndex) => {
     row.forEach((symbol, columnIndex) => {
