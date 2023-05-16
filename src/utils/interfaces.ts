@@ -1,56 +1,51 @@
-interface IntCoordinatesXY {
+interface InterfacePositionsXY {
   x: number
   y: number
 }
 
-interface IntBorders {
-  top: number
-  bottom: number
-  left: number
-  right: number
+interface InterfacePosition {
+  position: InterfacePositionsXY
 }
 
-interface IntGridSquare {
-  position: IntCoordinatesXY
-  squareName: string
-}
-
-interface IntBoundary {
-  position: IntCoordinatesXY
-  height: number
-  width: number
-}
-
-interface IntBot {
-  position: IntCoordinatesXY
-  velocity: IntCoordinatesXY
+interface InterfaceBot extends InterfacePosition {
+  velocity: InterfacePositionsXY
   radius?: number
   color?: string
 }
 
-interface IntCircle extends IntBot {
-  velocity: IntCoordinatesXY
+interface InterfaceBoundary extends InterfacePosition {
+  color?: string
+}
+
+interface InterfaceCircle extends InterfaceBot {
+  velocity: InterfacePositionsXY
   radius: number
 }
 
 interface InterfaceRectangle {
   height: number
   width: number
-  position: IntCoordinatesXY
+  position: InterfacePositionsXY
 }
 
-interface IntCollitionCircleAndRectangle {
-  circle: IntCircle
+interface InterfaceGridSquare {
+  position: InterfacePositionsXY
+  color: string
+  squareName: string
+}
+
+interface InterfaceColitionElements {
+  circle: InterfaceCircle
   rectangle: InterfaceRectangle
 }
 
 export type {
-  IntBoundary,
-  IntGridSquare,
-  IntCoordinatesXY,
-  IntBorders,
-  IntBot,
-  IntCircle,
+  InterfacePositionsXY,
+  InterfacePosition,
+  InterfaceBot,
+  InterfaceBoundary,
+  InterfaceCircle,
   InterfaceRectangle,
-  IntCollitionCircleAndRectangle
+  InterfaceColitionElements,
+  InterfaceGridSquare
 }

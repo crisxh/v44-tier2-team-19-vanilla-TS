@@ -1,21 +1,23 @@
 import { canvasContext as ctx } from '../browser/browserElements'
-import { type IntCoordinatesXY, type IntBoundary } from '../utils/interfaces'
+import { type InterfacePositionsXY, type InterfaceBoundary } from '../utils/interfaces'
 
 class Boundary {
-  public position: IntCoordinatesXY
-  public height: number
+  public position: InterfacePositionsXY
   public width: number
-  static width = 50
-  static height = 50
+  public height: number
+  public color: string
+  static width: number = 40
+  static height: number = 40
 
-  constructor ({ position, width = 50, height = 50 }: IntBoundary) {
+  constructor ({ position, color = 'green' }: InterfaceBoundary) {
     this.position = position
-    this.width = width
-    this.height = height
+    this.width = 40
+    this.height = 40
+    this.color = color
   }
 
   draw (): void {
-    ctx.fillStyle = 'blue'
+    ctx.fillStyle = this.color
     ctx.fillRect(this.position.x, this.position.y, this.height, this.width)
   }
 }

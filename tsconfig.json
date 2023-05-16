@@ -19,5 +19,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "include": ["src", "deprecated/mainREF.ts", "deprecated/pacman.ts", "deprecated/pacman.player.ts"]
 }
